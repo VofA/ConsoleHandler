@@ -1,3 +1,5 @@
+#include "Style.hpp"
+
 void Style::setForegroundColor(int foregroundColor) {
 	setFontColor(foregroundColor, currentBackgroundColor);
 }
