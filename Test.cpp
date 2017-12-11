@@ -1,8 +1,11 @@
 #include "Color.hpp"
+#include "Style.hpp"
 #include <iostream>
 
-int main() {
-	std::cout << Color::BLACK;
+Style css;
 
+int main() {
+	css.setFontColor(Color::BLACK, Color::WHITE);
+	std::cout << "Hello World!";
 	return 0;
 }

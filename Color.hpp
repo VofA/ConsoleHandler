@@ -1,3 +1,6 @@
+#ifndef HPP_COLOR
+#define HPP_COLOR
+
 class Color {
 public:
 	const static int BLACK        = 0;
@@ -19,3 +22,5 @@ public:
 protected:
 private:
 };
+
+#endif
