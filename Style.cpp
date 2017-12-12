@@ -1,15 +1,15 @@
 #include "Style.hpp"
 
-void getForegroundColor(int foregroundColor) {
+void Style::getForegroundColor(int foregroundColor) {
 	getColor(foregroundColor, currentBackgroundColor);
 }
 
-void getBackgroundColor(int backgroundColor) {
+void Style::getBackgroundColor(int backgroundColor) {
 	getColor(currentForegroundColor, backgroundColor);
 }
 
-void getColor(int foregroundColor, int backgroundColor) {
-	currentForegroundColor = foregroundColor
+void Style::getColor(int foregroundColor, int backgroundColor) {
+	currentForegroundColor = foregroundColor;
 	currentBackgroundColor = backgroundColor;
 	
 	int color = backgroundColor * 0x10 + foregroundColor;
@@ -17,19 +17,19 @@ void getColor(int foregroundColor, int backgroundColor) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
-void getDefaultColor() {
+void Style::getDefaultColor() {
 	getColor(defaultForegroundColor, defaultBackgroundColor);
 }
 
-void setDefaultColor(int foregroundColor, int backgroundColor) {
+void Style::setDefaultColor(int foregroundColor, int backgroundColor) {
 	defaultForegroundColor = foregroundColor;
 	defaultBackgroundColor = backgroundColor;
 }
 
-void setDefaultForegroundColor(int foregroundColor) {
+void Style::setDefaultForegroundColor(int foregroundColor) {
 	defaultForegroundColor = foregroundColor;
 }
 
-void setDefaultBackgroundColor(int backgroundColor) {
+void Style::setDefaultBackgroundColor(int backgroundColor) {
 	defaultBackgroundColor = backgroundColor;
 }
