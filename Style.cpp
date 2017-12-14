@@ -1,35 +1,16 @@
 #include "Style.hpp"
 
-void Style::getForegroundColor(int foregroundColor) {
-	getColor(foregroundColor, currentBackgroundColor);
+struct Theme Style::create(unsigned short foreground, unsigned short background) {
+	struct Theme theme;
+
+	theme.foreground = foreground;
+	theme.background = background;
+
+	return theme;
 }
 
-void Style::getBackgroundColor(int backgroundColor) {
-	getColor(currentForegroundColor, backgroundColor);
-}
-
-void Style::getColor(int foregroundColor, int backgroundColor) {
-	currentForegroundColor = foregroundColor;
-	currentBackgroundColor = backgroundColor;
-	
-	int color = backgroundColor * 0x10 + foregroundColor;
+void Style::select(struct Theme theme) {
+	unsigned short color = theme.background * 0x10 + theme.foreground;
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
-
-void Style::getDefaultColor() {
-	getColor(defaultForegroundColor, defaultBackgroundColor);
-}
-
-void Style::setDefaultColor(int foregroundColor, int backgroundColor) {
-	defaultForegroundColor = foregroundColor;
-	defaultBackgroundColor = backgroundColor;
-}
-
-void Style::setDefaultForegroundColor(int foregroundColor) {
-	defaultForegroundColor = foregroundColor;
-}
-
-void Style::setDefaultBackgroundColor(int backgroundColor) {
-	defaultBackgroundColor = backgroundColor;
 }

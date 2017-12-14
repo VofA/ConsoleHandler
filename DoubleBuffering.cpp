@@ -1,21 +1,14 @@
 #include "DoubleBuffering.hpp"
 
 void DoubleBuffering::draw() {
-	for (int y = 0; y < onScreenBuffer.size(); ++y) {
-		for (int x = 0; x < onScreenBuffer[y].size(); ++x) {
-			bool edited = false;
+	for (unsigned int y = 0; y < onScreenBuffer.size(); ++y) {
+		for (unsigned int x = 0; x < onScreenBuffer[y].size(); ++x) {
+			if (onScreenBuffer[y][x].theme.foreground != newScreenBuffer[y][x].theme.foreground ||
+				onScreenBuffer[y][x].theme.background != newScreenBuffer[y][x].theme.background ||
+				onScreenBuffer[y][x].symbol != newScreenBuffer[y][x].symbol) {
 
-			if (onScreenBuffer[y][x].foregroundColor != newScreenBuffer[y][x].foregroundColor) {
-				style.getForegroundColor(newScreenBuffer[y][x].foregroundColor);
-				edited = true;
-			}
-
-			if (onScreenBuffer[y][x].backgroundColor != newScreenBuffer[y][x].backgroundColor) {
-				style.getBackgroundColor(newScreenBuffer[y][x].backgroundColor);
-				edited = true;
-			}
-			if (onScreenBuffer[y][x].symbol != newScreenBuffer[y][x].symbol || edited) {
 				setCursorPosition(x, y);
+				Style::select(newScreenBuffer[y][x].theme);
 				std::cout << newScreenBuffer[y][x].symbol;
 			}
 
@@ -26,7 +19,7 @@ void DoubleBuffering::draw() {
 }
 
 void DoubleBuffering::init(int height, int width) {
-	Pixel emptyPixel;
+	Pixel pixelEmpty;
 
 	onScreenBuffer.resize(height);
 	newScreenBuffer.resize(height);
@@ -36,18 +29,30 @@ void DoubleBuffering::init(int height, int width) {
 		newScreenBuffer[y].resize(width);
 
 		for (int x = 0; x < width; x++) {
-			onScreenBuffer[y][x] = emptyPixel;
-			newScreenBuffer[y][x] = emptyPixel;
+			onScreenBuffer[y][x] = pixelEmpty;
+			newScreenBuffer[y][x] = pixelEmpty;
 		}
 	}
 }
 
-void DoubleBuffering::changePixel(int x, int y, char symbol, int foregroundColor, int backgroundColor) {
-	newScreenBuffer[y][x].symbol = symbol;
-	newScreenBuffer[y][x].foregroundColor = foregroundColor;
-	newScreenBuffer[y][x].backgroundColor = backgroundColor;
+void DoubleBuffering::clear(Theme theme) {
+	Pixel pixel;
+	pixel.theme = theme;
+
+	for (unsigned int y = 0; y < newScreenBuffer.size(); y++) {
+		for (unsigned int x = 0; x < newScreenBuffer[y].size(); x++) {
+			newScreenBuffer[y][x] = pixel;
+		}
+	}
+}
+
+void DoubleBuffering::changePixel(unsigned int x, unsigned int y, char symbol, Theme theme) {
+	if (y >= 0 && y < newScreenBuffer.size() && x >= 0 && x < newScreenBuffer[y].size()) {
+		newScreenBuffer[y][x].symbol = symbol;
+		newScreenBuffer[y][x].theme = theme;
+	}
 }
 
 void DoubleBuffering::setCursorPosition(int x, int y) {
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {short(x), short(y)});
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD { short(x), short(y) });
 }

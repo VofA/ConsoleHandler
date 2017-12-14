@@ -4,24 +4,17 @@
 #include <windows.h>
 #include "Color.hpp"
 
+struct Theme {
+	int foreground = Color::BLACK;
+	int background = Color::BLACK;
+};
+
 class Style {
 public:
-	void getForegroundColor(int foregroundColor);
-	void getBackgroundColor(int backgroundColor);
-	void getColor(int foregroundColor, int backgroundColor);
-	void getDefaultColor();
-
-	void setDefaultColor(int foregroundColor, int backgroundColor);
-	void setDefaultForegroundColor(int foregroundColor);
-	void setDefaultBackgroundColor(int backgroundColor);
-
+	struct Theme static create(unsigned short foreground, unsigned short background);
+	void static select(struct Theme theme);
 protected:
 private:
-	int currentBackgroundColor = Color::BLACK;
-	int currentForegroundColor = Color::WHITE;
-
-	int defaultBackgroundColor = Color::BLACK;
-	int defaultForegroundColor = Color::WHITE;
 };
 
 #endif
