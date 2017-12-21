@@ -15,11 +15,10 @@ struct Area {
 
 class Graphics : public DoubleBuffering {
 public:
-	void fill(Area area, char symbol = ' ', Theme theme = themeEmpty);
-	void writeText(int x, int y, std::string text, int length, Theme theme = themeEmpty);
-protected:
+	void fill(Area area, char symbol = ' ', Style::Theme theme = themeEmpty);
+	void writeText(int x, int y, std::string text, unsigned int length, Style::Theme theme = themeEmpty);
 private:
-	const static Theme themeEmpty;
+	const static Style::Theme themeEmpty;
 };
 
 #endif

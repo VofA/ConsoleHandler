@@ -19,8 +19,6 @@ public:
 	const static int LIGHTMAGENTA = 13;
 	const static int YELLOW = 14;
 	const static int WHITE = 15;
-protected:
-private:
 };
 
 #endif

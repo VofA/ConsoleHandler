@@ -35,7 +35,7 @@ void DoubleBuffering::init(int height, int width) {
 	}
 }
 
-void DoubleBuffering::clear(Theme theme) {
+void DoubleBuffering::clear(Style::Theme theme) {
 	Pixel pixel;
 	pixel.theme = theme;
 
@@ -46,7 +46,7 @@ void DoubleBuffering::clear(Theme theme) {
 	}
 }
 
-void DoubleBuffering::changePixel(unsigned int x, unsigned int y, char symbol, Theme theme) {
+void DoubleBuffering::changePixel(unsigned int x, unsigned int y, char symbol, Style::Theme theme) {
 	if (y >= 0 && y < newScreenBuffer.size() && x >= 0 && x < newScreenBuffer[y].size()) {
 		newScreenBuffer[y][x].symbol = symbol;
 		newScreenBuffer[y][x].theme = theme;

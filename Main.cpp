@@ -1,10 +1,42 @@
 #include "ConsoleHandler.hpp"
 
-int main() {
-	ConsoleHandler ch;
+ConsoleHandler ch;
 
+void handler(int key) {
+	switch (key)
+	{
+	case ConsoleHandler::KEY_CODE_W:
+		ch.setTitle("CALLBACK SUCCESS - W");
+		break;
+	case ConsoleHandler::KEY_CODE_A:
+		ch.setTitle("CALLBACK SUCCESS - A");
+		break;
+	case ConsoleHandler::KEY_CODE_S:
+		ch.setTitle("CALLBACK SUCCESS - S");
+		break;
+	case ConsoleHandler::KEY_CODE_D:
+		ch.setTitle("CALLBACK SUCCESS - D");
+		break;
+	default:
+		ch.setTitle("CALLBACK SUCCESS");
+		break;
+	}
+}
+
+void mainLoop() {
+	ch.mainLoop();
+}
+
+int main() {
 	ch.init(30, 60);
+
 	ch.setTitle("SUPER TERMINAL");
+
+	ch.registerHandlerCallback(handler);
+	ch.registerKeyCallback(ConsoleHandler::KEY_CODE_W);
+	ch.registerKeyCallback(ConsoleHandler::KEY_CODE_A);
+	ch.registerKeyCallback(ConsoleHandler::KEY_CODE_S);
+	ch.registerKeyCallback(ConsoleHandler::KEY_CODE_D);
 
 	ch.graphics.clear(Style::create(Color::WHITE, Color::WHITE));
 	ch.graphics.changePixel(5, 5, '$', Style::create(Color::BLACK, Color::WHITE));
@@ -18,8 +50,9 @@ int main() {
 	area.second.y = 10;
 
 	ch.graphics.fill(area, '#', Style::create(Color::LIGHTRED, Color::LIGHTRED));
-	
-	ch.graphics.draw();
+
+	std::thread threadMainLoop(mainLoop);
+	threadMainLoop.join();
 
 	system("pause");
 	return 0;
