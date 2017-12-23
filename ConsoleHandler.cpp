@@ -15,7 +15,8 @@ void ConsoleHandler::init(unsigned int height, unsigned int width) {
 }
 
 void ConsoleHandler::setTitle(const std::wstring &title) {
-	SetConsoleTitleA((LPCSTR)title.c_str());
+	const std::string shortTitle(title.begin(), title.end());
+	SetConsoleTitle(shortTitle.c_str());
 }
 
 void ConsoleHandler::registerHandlerCallback(void(*function)(int)) {

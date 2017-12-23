@@ -4,8 +4,7 @@
 ConsoleHandler ch;
 
 void handler(int key) {
-	switch (key)
-	{
+	switch (key) {
 	case ConsoleHandler::KEY_CODE_W:
 		ch.setTitle(L"CALLBACK SUCCESS - W");
 		break;
@@ -22,10 +21,6 @@ void handler(int key) {
 		ch.setTitle(L"CALLBACK SUCCESS");
 		break;
 	}
-}
-
-void mainLoop() {
-	ch.mainLoop();
 }
 
 int main() {
@@ -58,9 +53,7 @@ int main() {
 	ch.writeText(0, 23, L"Ελληνικά", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
 	ch.writeText(0, 24, L"Español", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
 
-	std::thread threadMainLoop(mainLoop);
-	threadMainLoop.join();
+	ch.mainLoop();
 
-	system("pause");
 	return 0;
 }
