@@ -1,23 +1,23 @@
 #ifndef HPP_CONSOLE_HANDLER
 #define HPP_CONSOLE_HANDLER
 
-#include "Graphics.hpp"
 #include <string>
-#include <thread>
 #include <vector>
+#include <iostream>
+#include <windows.h>
+#include "Graphics.hpp"
 
-class ConsoleHandler {
+class ConsoleHandler : public Graphics {
 public:
-	void init(int height, int width);
-	void setTitle(const std::string &title);
+	void init(unsigned int height, unsigned int width);
+
+	void setTitle(const std::wstring &title);
 
 	void registerHandlerCallback(void(*function)(int));
 	void registerKeyCallback(int keyCode);
 
 	void mainLoop();
 	
-	Graphics graphics;
-
 	const static int KEY_CODE_0 = 0x30;
 	const static int KEY_CODE_1 = 0x31;
 	const static int KEY_CODE_2 = 0x32;
@@ -55,13 +55,11 @@ public:
 	const static int KEY_CODE_Y = 0x59;
 	const static int KEY_CODE_Z = 0x5A;
 	const static int KEY_CODE_SPACE = 0x20;
-private:
-	void(*handlerCallback)(int);
 
+private:
 	std::vector<int> keys;
 
-	int height;
-	int width;
+	void(*handlerCallback)(int);
 };
 
 #endif

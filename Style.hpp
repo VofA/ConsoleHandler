@@ -4,20 +4,15 @@
 #include <windows.h>
 #include "Color.hpp"
 
-
-
 class Style {
 public:
 	struct Theme {
-		int foreground = Color::BLACK;
-		int background = Color::BLACK;
+		unsigned short foreground = Color::BLACK;
+		unsigned short background = Color::BLACK;
 	};
 
-	Theme static create(unsigned short foreground, unsigned short background);
-	void static select(Theme theme);
-
-private:
-	HANDLE Console = GetStdHandle(STD_OUTPUT_HANDLE);
+	static Theme create(unsigned short foreground = Color::BLACK, unsigned short background = Color::BLACK);
+	static void select(Theme theme);
 };
 
 #endif

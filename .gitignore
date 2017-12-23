@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+
+# No project
+*.sln
+*.vcxproj
+*.filters
+*.vs
+Debug

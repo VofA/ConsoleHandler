@@ -1,4 +1,5 @@
 #include "ConsoleHandler.hpp"
+#include <thread>
 
 ConsoleHandler ch;
 
@@ -6,19 +7,19 @@ void handler(int key) {
 	switch (key)
 	{
 	case ConsoleHandler::KEY_CODE_W:
-		ch.setTitle("CALLBACK SUCCESS - W");
+		ch.setTitle(L"CALLBACK SUCCESS - W");
 		break;
 	case ConsoleHandler::KEY_CODE_A:
-		ch.setTitle("CALLBACK SUCCESS - A");
+		ch.setTitle(L"CALLBACK SUCCESS - A");
 		break;
 	case ConsoleHandler::KEY_CODE_S:
-		ch.setTitle("CALLBACK SUCCESS - S");
+		ch.setTitle(L"CALLBACK SUCCESS - S");
 		break;
 	case ConsoleHandler::KEY_CODE_D:
-		ch.setTitle("CALLBACK SUCCESS - D");
+		ch.setTitle(L"CALLBACK SUCCESS - D");
 		break;
 	default:
-		ch.setTitle("CALLBACK SUCCESS");
+		ch.setTitle(L"CALLBACK SUCCESS");
 		break;
 	}
 }
@@ -30,7 +31,7 @@ void mainLoop() {
 int main() {
 	ch.init(30, 60);
 
-	ch.setTitle("SUPER TERMINAL");
+	ch.setTitle(L"SUPER TERMINAL");
 
 	ch.registerHandlerCallback(handler);
 	ch.registerKeyCallback(ConsoleHandler::KEY_CODE_W);
@@ -38,18 +39,18 @@ int main() {
 	ch.registerKeyCallback(ConsoleHandler::KEY_CODE_S);
 	ch.registerKeyCallback(ConsoleHandler::KEY_CODE_D);
 
-	ch.graphics.clear(Style::create(Color::WHITE, Color::WHITE));
-	ch.graphics.changePixel(5, 5, '$', Style::create(Color::BLACK, Color::WHITE));
+	ch.clear(Style::create(Color::WHITE, Color::WHITE));
+	ch.changePixel(5, 5, '$', Style::create(Color::BLACK, Color::WHITE));
 
-	ch.graphics.writeText(20, 2, "Hello World!", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
+	ch.writeText(20, 2, L"Hello World!", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
 
-	Area area;
+	Graphics::Area area;
 	area.first.x = 6;
 	area.first.y = 6;
 	area.second.x = 10;
 	area.second.y = 10;
 
-	ch.graphics.fill(area, '#', Style::create(Color::LIGHTRED, Color::LIGHTRED));
+	ch.fill(area, '#', Style::create(Color::LIGHTRED, Color::LIGHTRED));
 
 	std::thread threadMainLoop(mainLoop);
 	threadMainLoop.join();

@@ -3,22 +3,22 @@
 
 #include "DoubleBuffering.hpp"
 
-struct Point {
-	int x = 0;
-	int y = 0;
-};
 
-struct Area {
-	Point first;
-	Point second;
-};
 
 class Graphics : public DoubleBuffering {
 public:
-	void fill(Area area, char symbol = ' ', Style::Theme theme = themeEmpty);
-	void writeText(int x, int y, std::string text, unsigned int length, Style::Theme theme = themeEmpty);
-private:
-	const static Style::Theme themeEmpty;
+	struct Point {
+		unsigned int x = 0;
+		unsigned int y = 0;
+	};
+
+	struct Area {
+		Point first;
+		Point second;
+	};
+
+	void fill(Area area, wchar_t symbol = ' ', Style::Theme theme = Style::create());
+	void writeText(unsigned int x, unsigned int y, std::wstring text, unsigned int length, Style::Theme theme = Style::create());
 };
 
 #endif
