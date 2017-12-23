@@ -3,8 +3,6 @@
 
 #include "DoubleBuffering.hpp"
 
-
-
 class Graphics : public DoubleBuffering {
 public:
 	struct Point {
