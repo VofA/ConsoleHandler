@@ -1,4 +1,4 @@
-#include "ConsoleHandler.hpp"
+﻿#include "ConsoleHandler.hpp"
 #include <thread>
 
 ConsoleHandler ch;
@@ -51,6 +51,12 @@ int main() {
 	area.second.y = 10;
 
 	ch.fill(area, '#', Style::create(Color::LIGHTRED, Color::LIGHTRED));
+
+	ch.writeText(0, 20, L"│┌┐└┘├┤┬┴┼═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
+	ch.writeText(0, 21, L"English", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
+	ch.writeText(0, 22, L"Русский", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
+	ch.writeText(0, 23, L"Ελληνικά", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
+	ch.writeText(0, 24, L"Español", 30, Style::create(Color::LIGHTBLUE, Color::BLACK));
 
 	std::thread threadMainLoop(mainLoop);
 	threadMainLoop.join();

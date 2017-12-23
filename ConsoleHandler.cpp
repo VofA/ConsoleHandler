@@ -7,6 +7,10 @@ void ConsoleHandler::init(unsigned int height, unsigned int width) {
 	SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), consoleSizes);
 	SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), true, &window);
 	
+	_setmode(_fileno(stdout), _O_WTEXT);
+	_setmode(_fileno(stdin), _O_WTEXT);
+	_setmode(_fileno(stderr), _O_WTEXT);
+
 	Graphics::init(height, width);
 }
 

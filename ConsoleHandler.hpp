@@ -1,8 +1,10 @@
 #ifndef HPP_CONSOLE_HANDLER
 #define HPP_CONSOLE_HANDLER
 
+#include <io.h>
 #include <string>
 #include <vector>
+#include <fcntl.h>
 #include <iostream>
 #include <windows.h>
 #include "Graphics.hpp"
