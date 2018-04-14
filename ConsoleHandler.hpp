@@ -13,6 +13,8 @@ class ConsoleHandler : public Graphics {
 public:
 	void init(unsigned int height, unsigned int width);
 
+	void initWindow();
+
 	void setTitle(const std::wstring &title);
 
 	void registerHandlerCallback(void(*function)(int));
@@ -62,6 +64,9 @@ private:
 	std::vector<int> keys;
 
 	void(*handlerCallback)(int);
+	
+	unsigned int _height;
+	unsigned int _width;
 };
 
 #endif

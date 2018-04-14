@@ -1,4 +1,4 @@
-﻿#include "ConsoleHandler.hpp"
+#include "ConsoleHandler.hpp"
 #include <thread>
 
 ConsoleHandler ch;
